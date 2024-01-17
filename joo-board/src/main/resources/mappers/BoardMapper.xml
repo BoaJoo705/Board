@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.board.jooboard.dao.BoardDao">
+    <insert id="insert" parameterType="com.board.jooboard.vo.Board">
+        INSERT INTO BOARD 
+        (
+        	BOARD_ID,
+        	USER_ID,
+        	BOARD_TITLE,
+        	BOARD_CONTENT,
+        	BOARD_CNT,
+        	DEL_YN,
+        	REG_DATE,
+        	MOD_DATE,
+        	ATCH_YN
+        )
+        VALUES
+        (
+        	#{boardId},
+        	#{userId},
+        	#{boardTitle},
+        	#{boardContent},
+        	#{boardCnt},
+        	#{delYn},
+        	now(),
+        	#{modDate},
+        	#{atchYn}
+        )
+    </insert>
+    
+    <select id="selectBoardList" resultType="com.board.jooboard.vo.Board">
+    	SELECT
+    		*
+   		FROM BOARD
+   		WHERE DEL_YN = "N"
+   		ORDER BY REG_DATE DESC
+   			
+    </select>
+</mapper>
