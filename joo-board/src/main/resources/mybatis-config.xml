@@ -6,8 +6,8 @@
         <setting name="callSettersOnNulls" value="true"/>
     </settings>
     
-<!-- 	<mappers> -->
-<!-- 		<mapper resource="/mappers/BoardMapper.xml"></mapper> -->
-<!-- 		<mapper resource="/mappers/TestMapper.xml"></mapper> -->
-<!-- 	</mappers> -->
+	<!-- <mappers> 
+		<mapper resource="/mappers/BoardMapper.xml"></mapper> 
+		<mapper resource="/mappers/BoardAttachMent.xml"></mapper> 
+ 	</mappers> -->
 </configuration>

@@ -17,7 +17,7 @@
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
-            <a class="navbar-brand ps-3" href="index.html">Boa's board</a>
+            <a class="navbar-brand ps-3" href="/api/board/list">Boa's board</a>
             <!-- Sidebar Toggle-->
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
             <!-- Navbar Search-->
@@ -128,7 +128,7 @@
                                 <i class="fas fa-table me-1"></i>
                                 Dashboard
                             	<div class="button-contents button" align="right">
-							    	<span class="button-text">등록</span>
+							    	<span class="button-text" onClick="location.href='/board/write'">등록</span>
 							  	</div>
                             </div>
                             <div class="card-body">

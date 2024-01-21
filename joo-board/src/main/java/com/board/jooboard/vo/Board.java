@@ -1,5 +1,7 @@
 package com.board.jooboard.vo;
 
+import org.apache.commons.io.FileUtils;
+
 import lombok.Data;
 
 @Data
@@ -22,7 +24,11 @@ public class Board {
 	
 	private String atchYn;
 	
-	
+	private FileUtils[] attachfile;
+
+	private String fileName;
+
+	private String filePath;
 	
 }
 

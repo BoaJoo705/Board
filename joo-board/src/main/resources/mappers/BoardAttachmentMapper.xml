@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.board.jooboard.dao.BoardAttachmentDao">
+    <insert id="insert" parameterType="com.board.jooboard.vo.BoardAttachment">
+         INSERT INTO BOARD_ATTACHMENT 
+        (
+        	ATTACH_ID,
+        	ORI_FILE_NAME,
+        	STORED_FILE_NAME,
+        	EXT_NM,
+        	FILE_PATH,
+        	BOARD_ID,
+        	FILE_SIZE,
+        	REG_DT
+        )
+        VALUES
+        (
+        	#{attachId},
+        	#{oriFileName},
+        	#{storedFileName},
+        	#{extNm},
+        	#{filePath},
+        	#{boardId},
+			#{fileSize},
+        	now()
+        ) 
+    </insert>
+</mapper>

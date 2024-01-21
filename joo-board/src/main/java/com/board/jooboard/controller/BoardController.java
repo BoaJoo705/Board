@@ -12,14 +12,15 @@ public class BoardController {
 		return "board/board";
 	}
 	
-//	@RequestMapping("/main")
-//	public String main() {
-//		return "main/main";
-//	}
+	@RequestMapping("/main")
+	public String main(){
+		return "main/main";
+	}
 	
 	// 게시글 상세페이지
-	@RequestMapping("/board/write")
+	@RequestMapping("/write")
 	public String detail() {
+		System.out.println("상세페이지 들어가짐");
 		return "board/detail";
 	}
 }

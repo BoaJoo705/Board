@@ -20,6 +20,7 @@
 			</div>
 		</div>
 		<div class="col-md-9">
+				<form id="boardForm"  method="POST" enctype="multipart/form-data">
 			<div class="contact-form">
 				<div class="form-group">
 				  <label class="control-label col-sm-2" for="title">제목</label>
@@ -40,17 +41,19 @@
 <!-- 				  </div> -->
 <!-- 				</div> -->
 				<div class="form-group">
-				  <label class="control-label col-sm-2" for="content">내용:</label>
+				  <label class="control-label col-sm-2" for="content">내용</label>
 				  <div class="col-sm-10">
 					<textarea class="form-control" rows="10" id="content" name="content" placeholder="내용을 입력해주세요"></textarea>
 				  </div>
 				</div>
-<!-- 				<div class="form-group"> -->
-<!-- 				  <label class="control-label col-sm-2" for="email">첨부파일:</label> -->
-<!-- 				  <div class="col-sm-10"> -->
-<!-- 					<input type="file" class="form-control" id="attachfile" placeholder="첨부파일 등록" name="attachfile"> -->
-<!-- 				  </div> -->
-<!-- 				</div> -->
+				<div class="form-group"> 
+				  <label class="control-label col-sm-4" for="file">첨부파일</label>
+				  <div class="col-sm-10">
+					<input type="file" id="file" name="file" accept=".jpg, .jpeg, .png"/><br>
+
+					<!-- <input type="file" class="form-control" id="attachfile" placeholder="첨부파일 등록" name="file"> -->
+				  </div>
+ 				</div>
 				<div class="form-group">        
 				  <div class="col-sm-offset-2 col-sm-10">
 					<button id="insert" class="btn btn-default">등록</button>
@@ -58,6 +61,7 @@
 				  </div>
 				</div>
 			</div>
+		</form>
 		</div>
 	</div>
 </div>
