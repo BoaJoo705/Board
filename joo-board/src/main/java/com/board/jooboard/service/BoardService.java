@@ -40,9 +40,6 @@ public class BoardService {
 	@Value("${upload.directory}")
 	String uploadFilePath ;
 
-	
-	
-    
 	@Transactional
 	public void insert(Board board, BoardAttachment boardAttachment,MultipartFile file) {
 
@@ -70,6 +67,13 @@ public class BoardService {
 			this.fileupload(boardAttachment,file);
 		}	
 		
+	}
+
+	// 상세게시판 조회
+	public Board selectBoardById(Board board){
+		System.out.println("selectBoardById 상세게시판 조회");
+		board = boardDao.selectBoardById(board);
+		return board;
 	}
 
 	// 파일 DB 저장

@@ -13,8 +13,13 @@ public interface BoardDao {
     // 게시글 등록
 	void insert(Board board);
 
+	// 게시글 첨부파일 등록
 	void attachInsert(BoardAttachment boardAttachment);
 
+	// 게시글 리스트
 	List<Board> selectBoardList();
+
+	// 게시글 상세 조회
+    Board selectBoardById(Board board);
 
 }

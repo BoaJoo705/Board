@@ -36,6 +36,13 @@
    		FROM BOARD
    		WHERE DEL_YN = "N"
    		ORDER BY REG_DATE DESC
-   			
     </select>
+
+	<select id="selectBoardById" parameterType="com.board.jooboard.vo.Board" resultType="com.board.jooboard.vo.Board">
+		SELECT
+			*
+		FROM BOARD
+		WHERE BOARD_ID = #{boardId}
+	</select>
+
 </mapper>
