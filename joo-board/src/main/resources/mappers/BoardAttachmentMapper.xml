@@ -25,4 +25,11 @@
         	now()
         ) 
     </insert>
+
+	<select id="selectBoardAttachById" parameterType="com.board.jooboard.vo.BoardAttachment" resultType="com.board.jooboard.vo.BoardAttachment">
+		SELECT 
+			* 
+		FROM BOARD_ATTACHMENT
+		WHERE BOARD_ID = #{boardId}
+	</select>
 </mapper>

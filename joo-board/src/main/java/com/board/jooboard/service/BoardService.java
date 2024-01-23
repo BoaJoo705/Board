@@ -10,7 +10,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.FileCopyUtils;
@@ -42,7 +41,6 @@ public class BoardService {
 
 	@Transactional
 	public void insert(Board board, BoardAttachment boardAttachment,MultipartFile file) {
-
 		
 		// board 테이블 저장
 		board.setBoardId(0);
@@ -74,6 +72,13 @@ public class BoardService {
 		System.out.println("selectBoardById 상세게시판 조회");
 		board = boardDao.selectBoardById(board);
 		return board;
+	}
+
+	// 상세게시판 첨부파일 조회
+	public BoardAttachment selectBoardAttachById(BoardAttachment boardAttachment){
+		System.out.println("selectBoardAttachById 상세게시판 첨부파일 조회");
+		boardAttachment = boardAttachmentDao.selectBoardAttachById(boardAttachment);
+		return boardAttachment;
 	}
 
 	// 파일 DB 저장

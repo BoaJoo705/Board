@@ -1,16 +1,13 @@
 package com.board.jooboard.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.cassandra.CassandraProperties.Request;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
-
 import com.board.jooboard.service.BoardService;
 import com.board.jooboard.vo.Board;
+import com.board.jooboard.vo.BoardAttachment;
 
 @Controller
 @RequestMapping("/board")
@@ -74,12 +71,22 @@ public class BoardController {
     System.out.println("상세페이지 들어가짐");
 	System.out.println("id:"+id);
     if (id != null) {
-		System.out.println("id값 존재?");
+
+		System.out.println("id값 존재");
+
         Board board = new Board();
+		BoardAttachment boardAttachment = new BoardAttachment();
+
+		// board 데이터
         board.setBoardId(id);
         board = boardService.selectBoardById(board);
+
+		// 첨부파일 데이터
+		boardAttachment.setBoardId(board.getBoardId());
+		boardAttachment = boardService.selectBoardAttachById(boardAttachment);
         System.out.println("board!!!!: " + board);
         model.addAttribute("board", board);
+		model.addAttribute("boardAttachment", boardAttachment);
     }
     return "board/detail";
 }

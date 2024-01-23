@@ -9,4 +9,5 @@ public interface BoardAttachmentDao {
     // 첨부파일 등록
     void insert(BoardAttachment boardAttachment);
     
+    BoardAttachment selectBoardAttachById(BoardAttachment boardAttachment);
 }
