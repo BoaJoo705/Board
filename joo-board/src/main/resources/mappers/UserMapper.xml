@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.board.jooboard.dao.UserDao">
+    <insert id="insert" parameterType="com.board.jooboard.vo.Users" useGeneratedKeys="true" keyProperty="userId">
+        INSERT INTO USERS 
+        (
+        	USER_ID,
+        	USER_NAME,
+        	USER_PW,
+        	USER_EMAIL,
+        	MOBILE_NO,
+        	BIRTH,
+        	REG_DATE
+        )
+        VALUES
+        (
+        	#{userId},
+        	#{userName},
+        	#{userPw},
+        	#{userEmail},
+        	#{mobileNo},
+        	#{birth},
+        	now()
+		)
+    </insert>
+    
+
+	
+    <select id="selectBoardList" resultType="com.board.jooboard.vo.Board">
+    	SELECT
+    		*
+   		FROM BOARD
+   		WHERE DEL_YN = "N"
+   		ORDER BY REG_DATE DESC
+    </select>
+
+	<select id="selectBoardById" parameterType="com.board.jooboard.vo.Board" resultType="com.board.jooboard.vo.Board">
+		SELECT
+			*
+		FROM BOARD
+		WHERE BOARD_ID = #{boardId}
+	</select>
+
+</mapper>

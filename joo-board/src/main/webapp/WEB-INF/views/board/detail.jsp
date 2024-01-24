@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <head>
 
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -17,34 +18,66 @@
 			</div>
 		</div>
 		<div class="col-md-9">
-				<form id="boardForm"  method="POST" enctype="multipart/form-data">
+				<form id="boardForm"  method="POST" enctype="multipart/form-data" autocomplete="off">
 			<div class="contact-form">
 				<div class="form-group">
 				  <label class="control-label col-sm-2" for="title">제목</label>
-				  <div class="col-sm-10">          
-					<input type="text" class="form-control" id="title" placeholder="제목을 입력해주세요" name="title" value="${board.boardTitle}">
-				  </div>
+				  <div class="col-sm-10">  
+					<c:choose>
+            			<c:when test="${not empty board.boardId}">        
+							<input type="text" class="form-control" id="title" placeholder="제목을 입력해주세요" name="title" value="${board.boardTitle}" readonly>
+						</c:when>
+						<c:otherwise>
+							<input type="text" class="form-control" id="title" placeholder="제목을 입력해주세요" name="title">
+						</c:otherwise>
+					</c:choose>
+				</div>
 				</div>
 				<div class="form-group">
 				  <label class="control-label col-sm-2" for="content">내용</label>
 				  <div class="col-sm-10">
-					<textarea class="form-control" rows="10" id="content" name="content" placeholder="내용을 입력해주세요">${board.boardContent}</textarea>
+					<c:choose>
+            			<c:when test="${not empty board.boardId}">        
+							<textarea class="form-control" rows="10" id="content" name="content" placeholder="내용을 입력해주세요" readonly>${board.boardContent}</textarea>
+						</c:when>
+						<c:otherwise>
+							<textarea class="form-control" rows="10" id="content" name="content" placeholder="내용을 입력해주세요"></textarea>
+						</c:otherwise>
+					</c:choose>
 				  </div>
 				</div>
-				<div class="form-group"> 
-				  <label class="control-label col-sm-4" for="file">첨부파일</label>
-				  <div class="col-sm-10">
-					<input type="file" id="file" name="file" accept=".jpg, .jpeg, .png"/><br>
-					<c:if test="${not empty boardAttachment.filePath}">
+				<c:choose>
+					<c:when test="${not empty boardAttachment.storedFileName}">  <!-- 첨부파일이 있다면 -->
 						<img src="${pageContext.request.contextPath}/resources/img/upload/${boardAttachment.storedFileName}" style="width: 200px; height: 200px;" alt="첨부 이미지"/>
-					</c:if>
-				  </div>
- 				</div>
+					</c:when>
+					<c:otherwise> <!-- 첨부파일이 없다면 2가지 경우 (등록 or 첨부파일 x)-->
+						<c:choose>
+							<c:when test="${empty board.boardId}">  <!-- 첨부파일 x 상세보기 -->
+								<div class="form-group"> 
+								<label class="control-label col-sm-4" for="file">첨부파일</label>
+								<div class="col-sm-10">
+									<input type="file" id="file" name="file" accept=".jpg, .jpeg, .png"/><br>
+								</div>
+								</div>
+							</c:when>
+							<c:otherwise>
+
+							</c:otherwise>
+						</c:choose>
+					</c:otherwise>
+				</c:choose>
+				<c:if test="${empty board.boardId}">
+					<div class="form-group">        
+					  <div class="col-sm-offset-2 col-sm-10">
+						<button id="insert" type="button" class="btn btn-default">등록</button>
+					  </div>
+					</div>
+				</c:if>
 				<div class="form-group">        
-				  <div class="col-sm-offset-2 col-sm-10">
-					<button id="insert" class="btn btn-default">등록</button>
+					<div class="col-sm-offset-2 col-sm-10">
+					  <button id="list" type="button" class="btn btn-default" onclick="location.href='/api/list'">리스트</button>
+					</div>
 				  </div>
-				</div>
 			</div>
 		</form>
 		</div>

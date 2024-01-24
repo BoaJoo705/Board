@@ -42,7 +42,7 @@
   --bs-danger: #dc3545;
   --bs-light: #f8f9fa;
   --bs-dark: #212529;
-  --bs-primary-rgb: 13, 110, 253;
+  --bs-primary-rgb: #198754;
   --bs-secondary-rgb: 108, 117, 125;
   --bs-success-rgb: 25, 135, 84;
   --bs-info-rgb: 13, 202, 240;
@@ -180,6 +180,20 @@ address {
   margin-bottom: 1rem;
   font-style: normal;
   line-height: inherit;
+}
+
+.dupliCheck {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 10px 20px; /* padding 값을 조절 */
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 5px;
 }
 
 ol,
