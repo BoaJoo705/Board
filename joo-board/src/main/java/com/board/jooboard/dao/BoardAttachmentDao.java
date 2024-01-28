@@ -10,4 +10,6 @@ public interface BoardAttachmentDao {
     void insert(BoardAttachment boardAttachment);
     
     BoardAttachment selectBoardAttachById(BoardAttachment boardAttachment);
+
+    void delete(BoardAttachment boardAttachment);
 }

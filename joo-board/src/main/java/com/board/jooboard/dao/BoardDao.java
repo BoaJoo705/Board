@@ -22,4 +22,7 @@ public interface BoardDao {
 	// 게시글 상세 조회
     Board selectBoardById(Board board);
 
+	// 게시글 수정
+    void update(Board board);
+
 }

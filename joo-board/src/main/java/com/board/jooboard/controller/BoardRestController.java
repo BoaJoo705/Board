@@ -23,6 +23,7 @@ public class BoardRestController {
 	@Autowired
 	private BoardService boardService;
 
+	// 게시글 등록
 	@RequestMapping(value = "/insert")
 	public ResponseEntity<Result> createPost(
 			@RequestParam("title") String title,
@@ -60,6 +61,43 @@ public class BoardRestController {
 		// 성공적인 응답을 반환
 		return ResponseEntity.status(HttpStatus.OK).body(result);
 	}
+
+
+	// 게시글 수정
+	@RequestMapping("/update")
+	public ResponseEntity<Result> update(
+			@RequestParam("boardId") int boardId,
+			@RequestParam("title") String title,
+			@RequestParam("content") String content,
+			@RequestParam("atchYn") String atchYn,
+			@RequestParam("attachId") int attachId,
+			@RequestParam("imgDeleteYn") String imgDeleteYn,
+			@RequestParam("file") MultipartFile file){
+		
+
+		System.out.println("게시글 수정 로직 CONTROLLER");
+				
+		// Board 테이블 수정 로직
+		Board board = new Board();
+		BoardAttachment boardAttachment= new BoardAttachment();
+		board.setBoardId(boardId);
+		board.setBoardTitle(title);
+		board.setBoardContent(content);
+		board.setAtchYn(atchYn);
+		board.setImgDeleteYn(imgDeleteYn);
+		boardAttachment.setAttachId(attachId);
+
+		// 여기서 제목, 내용, 첨부 파일을 사용하여 게시물을 생성하는 작업을 수행합니다.
+		// 예를 들어, 파일 저장 경로, 데이터베이스 저장, 등의 작업을 수행합니다.
+		boardService.update(board,boardAttachment,file);		
+
+		Result result = new Result();
+		result.setCode("OK");
+		result.setMessage("게시글을 수정하였습니다.");
+		// 성공적인 응답을 반환
+		return ResponseEntity.status(HttpStatus.OK).body(result);
+	}
+
 
 	// 게시글 리스트
 	@RequestMapping("/list")

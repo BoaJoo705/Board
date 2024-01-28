@@ -11,7 +11,8 @@
         	FILE_PATH,
         	BOARD_ID,
         	FILE_SIZE,
-        	REG_DT
+        	REG_DT,
+			DEL_YN
         )
         VALUES
         (
@@ -22,7 +23,8 @@
         	#{filePath},
         	#{boardId},
 			#{fileSize},
-        	now()
+        	now(),
+			#{delYn}
         ) 
     </insert>
 
@@ -31,5 +33,12 @@
 			* 
 		FROM BOARD_ATTACHMENT
 		WHERE BOARD_ID = #{boardId}
+		AND DEL_YN = #{delYn}
 	</select>
+
+	<update id="delete" parameterType="com.board.jooboard.vo.BoardAttachment">
+		UPDATE BOARD_ATTACHMENT
+			SET DEL_YN = #{delYn}
+		WHERE ATTACH_ID = #{attachId}
+	</update>
 </mapper>

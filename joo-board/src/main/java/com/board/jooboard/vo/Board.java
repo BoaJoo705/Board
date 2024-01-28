@@ -29,6 +29,9 @@ public class Board {
 	private String fileName;
 
 	private String filePath;
+
+	// 이미지 삭제 여부 추가
+	private String imgDeleteYn;
 	
 }
 

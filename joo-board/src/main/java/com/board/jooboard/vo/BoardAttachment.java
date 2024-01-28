@@ -22,6 +22,8 @@ public class BoardAttachment {
 	
 	private String modDt;
 
+    private String delYn;
+
 
 	// @Builder
     // public BoardAttachment(String oriFileName, String storedFileName, long fileSize) {

@@ -11,7 +11,6 @@
         	BOARD_CNT,
         	DEL_YN,
         	REG_DATE,
-        	MOD_DATE,
         	ATCH_YN
         )
         VALUES
@@ -23,13 +22,19 @@
         	#{boardCnt},
         	#{delYn},
         	now(),
-        	#{modDate},
         	#{atchYn}
         ) 
     </insert>
     
+	<update id="update" parameterType="com.board.jooboard.vo.Board">
+		UPDATE BOARD
+			SET BOARD_TITLE = #{boardTitle},
+				BOARD_CONTENT = #{boardContent},
+				ATCH_YN = #{atchYn},
+				MOD_DATE = now()
+		WHERE BOARD_ID = #{boardId}
+	</update>
 
-	
     <select id="selectBoardList" resultType="com.board.jooboard.vo.Board">
     	SELECT
     		*

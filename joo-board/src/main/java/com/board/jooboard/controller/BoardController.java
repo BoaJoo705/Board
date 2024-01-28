@@ -68,28 +68,29 @@ public class BoardController {
 	// 게시글 상세페이지
 	@RequestMapping(value = {"/write/{id}", "/write"})
 	public String detail(@PathVariable(value = "id", required = false) Integer id, Model model) {
-    System.out.println("상세페이지 들어가짐");
-	System.out.println("id:"+id);
-    if (id != null) {
+		System.out.println("상세페이지 들어가짐");
+		System.out.println("id:"+id);
+		if (id != null) {
 
-		System.out.println("id값 존재");
+			System.out.println("id값 존재");
 
-        Board board = new Board();
-		BoardAttachment boardAttachment = new BoardAttachment();
+			Board board = new Board();
+			BoardAttachment boardAttachment = new BoardAttachment();
 
-		// board 데이터
-        board.setBoardId(id);
-        board = boardService.selectBoardById(board);
+			// board 데이터
+			board.setBoardId(id);
+			board = boardService.selectBoardById(board);
 
-		// 첨부파일 데이터
-		boardAttachment.setBoardId(board.getBoardId());
-		boardAttachment = boardService.selectBoardAttachById(boardAttachment);
-        System.out.println("board!!!!: " + board);
-        model.addAttribute("board", board);
-		model.addAttribute("boardAttachment", boardAttachment);
-    }
-    return "board/detail";
-}
+			// 첨부파일 데이터
+			boardAttachment.setBoardId(board.getBoardId());
+			boardAttachment.setDelYn("N");
+			boardAttachment = boardService.selectBoardAttachById(boardAttachment);
+			System.out.println("board!!!!: " + board);
+			model.addAttribute("board", board);
+			model.addAttribute("boardAttachment", boardAttachment);
+		}
+		return "board/detail";
+	}
 
 	
 }
