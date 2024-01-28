@@ -25,20 +25,19 @@
     </insert>
     
 
-	
-    <select id="selectBoardList" resultType="com.board.jooboard.vo.Board">
+    <select id="dupliCheck" parameterType="com.board.jooboard.vo.Users" resultType="int">
     	SELECT
-    		*
-   		FROM BOARD
-   		WHERE DEL_YN = "N"
-   		ORDER BY REG_DATE DESC
+    		COUNT(*)
+   		FROM USERS
+   		WHERE USER_ID = #{userId}
     </select>
 
-	<select id="selectBoardById" parameterType="com.board.jooboard.vo.Board" resultType="com.board.jooboard.vo.Board">
-		SELECT
-			*
-		FROM BOARD
-		WHERE BOARD_ID = #{boardId}
-	</select>
+	<select id="login" parameterType="com.board.jooboard.vo.Users" resultType="int">
+    	SELECT
+    		COUNT(*)
+   		FROM USERS
+   		WHERE USER_ID = #{userId}
+		AND USER_PW = #{userPw}
+    </select>
 
 </mapper>

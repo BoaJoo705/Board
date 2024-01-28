@@ -10,4 +10,8 @@ public interface UserDao {
     // 회원 등록
     void insert(Users users);
 
+    int dupliCheck(Users users);
+
+    int login(Users users);
+
 }

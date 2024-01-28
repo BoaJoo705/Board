@@ -11,4 +11,9 @@ public class UserController {
     public String signup(){
         return "/signup/signup";
     }
+
+    @RequestMapping("/login")
+    public String login(){
+        return "/login/login";
+    }
 }

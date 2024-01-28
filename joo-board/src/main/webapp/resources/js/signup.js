@@ -1,5 +1,9 @@
 $(document).ready(function(){
 
+	// 중복확인 체크 확인
+	var dupliChk = "false";
+
+
 	// 회원 등록 버튼 클릭
 	document.getElementById('insert').onclick = function() {
 		
@@ -18,6 +22,11 @@ $(document).ready(function(){
 		if (userId === "") {
 			alert("아이디를 입력해주세요.");
 			$("#userId").focus();
+			return false;
+		}
+
+		if(dupliChk === "false"){
+			alert("아이디 중복확인을 해주세요.");
 			return false;
 		}
 	
@@ -113,6 +122,48 @@ $(document).ready(function(){
 			}	
 			
 		});
-	}
+	};
+
+
+	// 중복 확인 버튼 클릭
+	document.getElementById('dupliCheck').onclick = function() {
+
+		var userId = document.getElementById('userId').value;
+
+		var user = {
+            "userId": userId
+        };
+
+
+		$.ajax({
+			url: '/api/dupliCheck',
+			type: 'POST',
+			// async: false,
+			data: JSON.stringify(user),
+			contentType: 'application/json',
+			success : function(result) { 
+				// 결과 성공 콜백함수        
+				// alert(result.message);  
+
+				// 중복된 아이디 있음
+				if(result.code === "error"){
+					$("#userId").focus();
+					alert("중복된 아이디가 있습니다.");
+					return false;
+				}else{
+					dupliChk = "true";
+					alert("사용할 수 있는 아이디 입니다.")
+					// window.location.href = "/api/list";  
+				}
+
+			},
+			error: function (jqXHR, textStatus, errorThrown,error) {
+				console.error('Ajax request failed:', textStatus, errorThrown);
+				console.log('Server response:', jqXHR.responseText);
+				alert('에러 발생: ' + error.responseText);
+			}	
+			
+		});
+	};
 		
   });

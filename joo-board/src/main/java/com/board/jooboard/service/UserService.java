@@ -17,4 +17,14 @@ public class UserService {
         userDao.insert(users);
     }
 
+    public int dupliCheck(Users users) {
+        int dupliCheck = userDao.dupliCheck(users);
+        return dupliCheck;
+    }
+
+    public int login(Users users) {
+        int loginChk = userDao.login(users);
+        return loginChk;
+    }
+
 }
