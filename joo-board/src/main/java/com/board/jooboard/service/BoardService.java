@@ -255,4 +255,10 @@ public class BoardService {
 		boardDao.contentUpdate(boardComment);
     }
 
+
+	// 댓글 삭제
+	public void commentDelete(BoardComment boardComment) {
+		boardDao.commentDelete(boardComment);
+	}
+
 }

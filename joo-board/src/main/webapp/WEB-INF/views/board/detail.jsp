@@ -133,9 +133,9 @@
 								<div class="mb-3" >
 									<input type="hidden" id="commentId" name="commentId"  value="${comment.commentId}">
 									<label class="form-label">댓글 번호 ${comment.commentId}</label>
-									<textarea id="updateComment${comment.commentId}" class="form-control updateComment${comment.commentId}" rows="3" required readonly>${comment.commentContent}</textarea>
-									<button type="button" class="btn btn-default upComment updateComment update${comment.commentId}" name="${comment.commentId}">댓글 수정</button>
-									<button type="button" class="btn btn-default deComment deleteComment delete${comment.commentId}" name="${comment.commentId}">댓글 삭제</button>
+									<textarea id="cmtNum${comment.commentId}" class="form-control updateComment${comment.commentId}" rows="3" required readonly>${comment.commentContent}</textarea>
+									<button type="button" class="btn btn-default cmtUpdate cmtUpdateNum${comment.commentId}" name="${comment.commentId}">댓글 수정</button>
+									<button type="button" class="btn btn-default cmtDelete cmtDeleteNum${comment.commentId}" name="${comment.commentId}">댓글 삭제</button>
 								</div>
 							</c:forEach>
 						</c:if>

@@ -38,4 +38,7 @@ public interface BoardDao {
 	// 댓글 수정 
     void contentUpdate(BoardComment boardComment);
 
+	// 댓글 삭제
+    void commentDelete(BoardComment boardComment);
+
 }

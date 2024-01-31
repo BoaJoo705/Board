@@ -159,7 +159,7 @@ public class BoardRestController {
 	}
 
 	
-	// 댓글 등록
+	// 댓글 수정
 	@RequestMapping("/contentUpdate")
 	public ResponseEntity<Result> contentUpdate(
 		@RequestParam("commentId") int commentId,
@@ -170,12 +170,31 @@ public class BoardRestController {
 		BoardComment boardComment = new BoardComment();
 		boardComment.setCommentId(commentId);
 		boardComment.setCommentContent(commentContent);
-		
+
 		boardService.contentUpdate(boardComment);
 
 		Result result = new Result();
 		result.setCode("OK");
 		result.setMessage("댓글을 수정하였습니다.");
+		return ResponseEntity.status(HttpStatus.OK).body(result);
+	}
+
+	// 댓글 삭제
+	@RequestMapping("/commentDelete")
+	public ResponseEntity<Result> commentDelete(
+		@RequestParam("commentId") int commentId){
+
+		System.out.println("게시글 댓글 삭제 로직 CONTROLLER");
+
+		BoardComment boardComment = new BoardComment();
+		boardComment.setCommentId(commentId);
+		boardComment.setDelYn("Y");
+		
+		boardService.commentDelete(boardComment);
+
+		Result result = new Result();
+		result.setCode("OK");
+		result.setMessage("댓글을 삭제하였습니다.");
 		return ResponseEntity.status(HttpStatus.OK).body(result);
 	}
 	

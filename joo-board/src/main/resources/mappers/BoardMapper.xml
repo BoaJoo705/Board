@@ -93,4 +93,10 @@
 		WHERE BOARD_ID = #{boardId}
 	</update>
 
+	<update id="commentDelete" parameterType="com.board.jooboard.vo.BoardComment">
+		UPDATE BOARD_COMMENT
+			SET DEL_YN = #{delYn}
+		WHERE COMMENT_ID = #{commentId}
+	</update>
+
 </mapper>

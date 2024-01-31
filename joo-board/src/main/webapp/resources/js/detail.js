@@ -69,8 +69,44 @@ if(document.getElementById('updateWrite')) {
 				});
 			}
 		}
-	// 수정 버튼 끝
+	
 
 		}
 	}
+	// 수정 버튼 끝
+
+	// 삭제버튼 
+	if(document.getElementById('delete')) {
+		document.getElementById('delete').onclick = function() {
+			console.log("삭제버튼 클릭");
+			if (confirm("정말 삭제하시겠습니까??") == true){    //확인
+
+				var formData = new FormData($('#boardForm')[0]);
+
+				$.ajax({
+					url: '/api/delete',
+					type: 'POST',
+					async: false,
+					data: formData,
+					// data: JSON.stringify(board),
+					contentType: false,
+					processData: false,
+					success : function(result) { 
+						// 삭제 성공시        
+						alert(result.message);  
+						window.location.href = "/api/list";  
+					},
+					error: function (jqXHR, textStatus, errorThrown, error) {
+						console.error('Ajax request failed:', textStatus, errorThrown);
+						console.log('Server response:', jqXHR.responseText);
+						alert('에러 발생: ' + error.responseText);
+					}   
+				});
+				// ajax 끝
+
+			}
+			}
+	}
+	// 삭제버튼 끝
+
 });
