@@ -101,7 +101,7 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests((auth) -> auth
                 .dispatcherTypeMatchers(DispatcherType.FORWARD).permitAll()
-                .requestMatchers("/user/login", "/user/signup","/board/write","/resources/**","/status","/api/*").permitAll() // 시큐리티 없이 들어갈수있는 곳 
+                .requestMatchers("/user/login", "/user/signup","/board/write","/resources/**","/status","/api/**","/board/write/**").permitAll() // 시큐리티 없이 들어갈수있는 곳 
                 .requestMatchers("**").hasRole("USER")
                 .anyRequest().authenticated());
 

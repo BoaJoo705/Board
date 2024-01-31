@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.board.jooboard.service.BoardService;
 import com.board.jooboard.vo.Board;
 import com.board.jooboard.vo.BoardAttachment;
+import com.board.jooboard.vo.BoardComment;
 import com.board.jooboard.vo.Result;
 
 
@@ -101,6 +103,24 @@ public class BoardRestController {
 	}
 
 
+	// 게시글 삭제
+	@RequestMapping("/delete")
+	public ResponseEntity<Result> delete(
+	@RequestParam("boardId") int boardId){
+
+		System.out.println("게시글 삭제 로직 CONTROLLER");
+
+		Board board = new Board();
+		board.setBoardId(boardId);
+		boardService.delete(board);
+
+		Result result = new Result();
+		result.setCode("OK");
+		result.setMessage("게시글을 삭제하였습니다.");
+		return ResponseEntity.status(HttpStatus.OK).body(result);
+	}
+
+
 	// 게시글 리스트
 	@RequestMapping("/list")
 	public ModelAndView boardList(){
@@ -115,6 +135,48 @@ public class BoardRestController {
 
 		mv.addObject("list",list);
 		return mv;
+	}
+
+
+	// 댓글 등록
+	@RequestMapping("/commentWrite")
+	public ResponseEntity<Result> commentWrite(
+		@RequestParam("boardId") int boardId,
+		@RequestParam("commentContent") String commentContent){
+
+		System.out.println("게시글 댓글 로직 CONTROLLER");
+
+		BoardComment boardComment = new BoardComment();
+		boardComment.setBoardId(boardId);
+		boardComment.setCommentContent(commentContent);
+		boardComment.setDelYn("N");
+		boardService.commentWrite(boardComment);
+
+		Result result = new Result();
+		result.setCode("OK");
+		result.setMessage("댓글을 등록하였습니다.");
+		return ResponseEntity.status(HttpStatus.OK).body(result);
+	}
+
+	
+	// 댓글 등록
+	@RequestMapping("/contentUpdate")
+	public ResponseEntity<Result> contentUpdate(
+		@RequestParam("commentId") int commentId,
+		@RequestParam("commentContent") String commentContent){
+
+		System.out.println("게시글 댓글 수정 로직 CONTROLLER");
+
+		BoardComment boardComment = new BoardComment();
+		boardComment.setCommentId(commentId);
+		boardComment.setCommentContent(commentContent);
+		
+		boardService.contentUpdate(boardComment);
+
+		Result result = new Result();
+		result.setCode("OK");
+		result.setMessage("댓글을 수정하였습니다.");
+		return ResponseEntity.status(HttpStatus.OK).body(result);
 	}
 	
 	

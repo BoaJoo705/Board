@@ -113,7 +113,7 @@ $(document).ready(function(){
 			success : function(result) { 
 				// 결과 성공 콜백함수        
 				alert(result.message);  
-				window.location.href = "/api/list";  
+				window.location.href = "/user/login";  
 			},
 			error: function (jqXHR, textStatus, errorThrown,error) {
 				console.error('Ajax request failed:', textStatus, errorThrown);

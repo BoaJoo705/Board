@@ -20,6 +20,7 @@ import com.board.jooboard.dao.BoardDao;
 import com.board.jooboard.util.FileUtils;
 import com.board.jooboard.vo.Board;
 import com.board.jooboard.vo.BoardAttachment;
+import com.board.jooboard.vo.BoardComment;
 
 
 
@@ -227,5 +228,31 @@ public class BoardService {
 		List<Board> selectBoardList = boardDao.selectBoardList();
 		return selectBoardList;
 	}
+
+
+	// 게시판 삭제
+    public void delete(Board board) {
+		// 삭제처리 여부 
+		board.setDelYn("Y");
+		boardDao.delete(board);
+		
+	}
+
+	// 댓글 등록
+	public void commentWrite(BoardComment boardComment) {
+		boardDao.commentWrite(boardComment);
+
+	}
+
+	// 댓글 리스트 
+	public List<BoardComment> selectBoardComment(BoardComment boardComment) {
+		List<BoardComment> commentList = boardDao.selectBoardComment(boardComment);
+		return commentList;
+	}
+
+	// 댓글 수정 
+    public void contentUpdate(BoardComment boardComment) {
+		boardDao.contentUpdate(boardComment);
+    }
 
 }

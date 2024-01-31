@@ -1,5 +1,52 @@
 $(document).ready(function(){
 
+	// 댓글달기 버튼 있으면 
+	if(document.getElementById('showCommentForm')) {
+		document.getElementById('showCommentForm').onclick = function() {
+			$('#commentForm').show(); 
+			$('#commentWrite').show(); 
+
+		}
+
+		if(document.getElementById('commentWrite')) {
+			document.getElementById('commentWrite').onclick = function() {
+				console.log("댓글 등록 ");
+
+				var formData = new FormData($('#boardForm')[0]);
+
+				
+				if (commentContent === "") {
+					alert(" 댓글을 입력하세요.");
+					return;
+				} 
+
+				console.log("댓글 ajax 넘기기전");
+				// alert("중지");
+				$.ajax({
+					url: '/api/commentWrite',
+					type: 'POST',
+					async: false,
+					data: formData,
+					contentType:false,
+					processData: false,
+					success : function(result) { 
+						// 댓글 저장 성공시      
+						alert(result.message);  
+						window.location.href = "/board/write/" + boardId; 
+					},
+					error: function (jqXHR, textStatus, errorThrown,error) {
+						console.error('Ajax request failed:', textStatus, errorThrown);
+						console.log('Server response:', jqXHR.responseText);
+						alert('에러 발생: ' + error.responseText);
+					}	
+				});
+
+
+
+			}
+		}
+
+	};
 
 	// 등록 버튼 클릭
 	if(document.getElementById('insert')) {
@@ -47,7 +94,8 @@ $(document).ready(function(){
 
 	// 수정 버튼 클릭시
 	if(document.getElementById('updateWrite')) {
-		document.getElementById('updateWrite').onclick = function() {
+		$(".commentUpdate").click(function(){
+		// document.getElementById('updateWrite').onclick = function() {
 			
 		// 첨부된 이미지 삭제 여부 
 		var imgDeleteClick = "N";
@@ -120,10 +168,44 @@ $(document).ready(function(){
 		}
 	// 수정 버튼 끝
 
-		}
-	}
 	
 
-	
-	 
+		// }
+	})
+	}
+
+	// 삭제버튼 
+	if(document.getElementById('delete')) {
+		document.getElementById('delete').onclick = function() {
+			console.log("삭제버튼 클릭");
+			if (confirm("정말 삭제하시겠습니까??") == true){    //확인
+				
+				var formData = new FormData($('#boardForm')[0]);
+
+				$.ajax({
+					url: '/api/delete',
+					type: 'POST',
+					async: false,
+					data: formData,
+					// data: JSON.stringify(board),
+					contentType: false,
+					processData: false,
+					success : function(result) { 
+						// 삭제 성공시        
+						alert(result.message);  
+						window.location.href = "/api/list";  
+					},
+					error: function (jqXHR, textStatus, errorThrown, error) {
+						console.error('Ajax request failed:', textStatus, errorThrown);
+						console.log('Server response:', jqXHR.responseText);
+						alert('에러 발생: ' + error.responseText);
+					}   
+				});
+
+			}
+		
+		}
+	}
+
+
 });

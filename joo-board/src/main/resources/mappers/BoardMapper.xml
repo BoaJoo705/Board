@@ -25,6 +25,27 @@
         	#{atchYn}
         ) 
     </insert>
+
+	<insert id="commentWrite" parameterType="com.board.jooboard.vo.BoardComment" useGeneratedKeys="true" keyProperty="boardId">
+        INSERT INTO BOARD_COMMENT 
+        (
+        	COMMENT_ID,
+        	COMMENT_CONTENT,
+        	BOARD_ID,
+        	USER_ID,
+        	REG_DT,
+        	DEL_YN
+        )
+        VALUES
+        (
+        	#{commentId},
+        	#{commentContent},
+        	#{boardId},
+        	#{userId},
+        	now(),
+        	#{delYn}
+        ) 
+    </insert>
     
 	<update id="update" parameterType="com.board.jooboard.vo.Board">
 		UPDATE BOARD
@@ -35,6 +56,13 @@
 		WHERE BOARD_ID = #{boardId}
 	</update>
 
+	<update id="contentUpdate" parameterType="com.board.jooboard.vo.BoardComment">
+		UPDATE BOARD_COMMENT
+			SET COMMENT_CONTENT = #{commentContent},
+				MOD_DT = now()
+		WHERE COMMENT_ID = #{commentId}
+	</update>
+
     <select id="selectBoardList" resultType="com.board.jooboard.vo.Board">
     	SELECT
     		*
@@ -43,11 +71,26 @@
    		ORDER BY REG_DATE DESC
     </select>
 
+	<select id="selectBoardComment" parameterType="com.board.jooboard.vo.BoardComment">
+    	SELECT
+    		*
+   		FROM BOARD_COMMENT
+   		WHERE DEL_YN = "N"
+		AND BOARD_ID = #{boardId}
+   		ORDER BY REG_DT DESC
+    </select>
+
 	<select id="selectBoardById" parameterType="com.board.jooboard.vo.Board" resultType="com.board.jooboard.vo.Board">
 		SELECT
 			*
 		FROM BOARD
 		WHERE BOARD_ID = #{boardId}
 	</select>
+
+	<update id="delete" parameterType="com.board.jooboard.vo.Board">
+		UPDATE BOARD
+			SET DEL_YN = #{delYn}
+		WHERE BOARD_ID = #{boardId}
+	</update>
 
 </mapper>

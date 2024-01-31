@@ -23,7 +23,6 @@
 			<input type="hidden" id="atchYn"  name="atchYn" value="${board.atchYn}">
 			<input type="hidden" id="imgDeleteYn"  name="imgDeleteYn" value="N">
 			<input type="hidden" id="attachId" name="attachId" value="${not empty boardAttachment.attachId ? boardAttachment.attachId : 0}">
-			<!-- <input type="hidden" id="attachId"  name="attachId" value="${boardAttachment.attachId}"> -->
 			<div class="contact-form">
 				<div class="form-group">
 				  <label class="control-label col-sm-2" for="title">제목</label>
@@ -106,11 +105,42 @@
 					  <button id="list" type="button" class="btn btn-default" onclick="location.href='/api/list'">리스트</button>
 					</div>
 				</div>
-				<div class="form-group">        
-					<div class="col-sm-offset-2 col-sm-10">
-					  <button id="updateWrite" type="button" class="btn btn-default">수정</button>
+				<c:if test="${not empty board.boardId}">
+					<div class="form-group">        
+						<div class="col-sm-offset-2 col-sm-10">
+						<button id="updateWrite" type="button" class="btn btn-default">수정</button>
+						</div>
 					</div>
-				</div>
+					<div class="form-group">        
+						<div class="col-sm-offset-2 col-sm-10">
+						<button id="delete" type="button" class="btn btn-default">삭제</button>
+						</div>
+					</div>
+					<div class="container">
+						<h1>댓글</h1>
+						<button id="showCommentForm" class="btn btn-primary">댓글 달기</button>
+						<div name="commentForm">
+							<!-- 댓글 입력 폼 (여기에 필요한 입력 요소들을 추가하세요) -->
+							<div class="mb-3" id="commentForm" style="display: none;">
+								<label class="form-label">댓글 내용</label>
+								<textarea class="form-control" id="commentContent" name="commentContent" rows="3" required></textarea>
+							</div>
+							<button id="commentWrite" type="submit" class="btn btn-success" style="display: none;">댓글 작성</button>
+						</div>
+						<!-- 댓글 목록은 여기에 표시될 수 있습니다. -->
+						<c:if test="${not empty boardCommentList}">
+							<c:forEach var="comment" items="${boardCommentList}" varStatus="st">
+								<div class="mb-3" >
+									<input type="hidden" id="commentId" name="commentId"  value="${comment.commentId}">
+									<label class="form-label">댓글 번호 ${comment.commentId}</label>
+									<textarea id="updateComment${comment.commentId}" class="form-control updateComment${comment.commentId}" rows="3" required readonly>${comment.commentContent}</textarea>
+									<button type="button" class="btn btn-default upComment updateComment update${comment.commentId}" name="${comment.commentId}">댓글 수정</button>
+									<button type="button" class="btn btn-default deComment deleteComment delete${comment.commentId}" name="${comment.commentId}">댓글 삭제</button>
+								</div>
+							</c:forEach>
+						</c:if>
+						</div>
+				</c:if>
 			</div>
 		</form>
 		</div>
@@ -119,3 +149,4 @@
 
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="/resources/js/detail.js" ></script> 
+<script type="text/javascript" src="/resources/js/comment.js" ></script> 

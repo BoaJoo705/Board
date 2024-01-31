@@ -1,5 +1,7 @@
 package com.board.jooboard.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.server.Session.Cookie;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.board.jooboard.service.BoardService;
 import com.board.jooboard.vo.Board;
 import com.board.jooboard.vo.BoardAttachment;
+import com.board.jooboard.vo.BoardComment;
 
 import io.jsonwebtoken.security.Request;
 
@@ -85,6 +88,7 @@ public class BoardController {
 
 			Board board = new Board();
 			BoardAttachment boardAttachment = new BoardAttachment();
+			BoardComment boardComment = new BoardComment();
 
 			// board 데이터
 			board.setBoardId(id);
@@ -95,10 +99,19 @@ public class BoardController {
 			boardAttachment.setDelYn("N");
 			boardAttachment = boardService.selectBoardAttachById(boardAttachment);
 			System.out.println("board!!!!: " + board);
+
+			// 댓글 데이터 
+			boardComment.setBoardId(id);
+			boardComment.setDelYn("N");
+			List<BoardComment> boardCommentList = boardService.selectBoardComment(boardComment);
+
+
 			model.addAttribute("board", board);
 			model.addAttribute("boardAttachment", boardAttachment);
+			model.addAttribute("boardCommentList", boardCommentList);
+
 		}
-		return "board/detail";
+		return "/board/detail";
 	}
 
 	
