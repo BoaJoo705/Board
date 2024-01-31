@@ -1,6 +1,8 @@
 package com.board.jooboard.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.server.Session.Cookie;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -8,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.board.jooboard.service.BoardService;
 import com.board.jooboard.vo.Board;
 import com.board.jooboard.vo.BoardAttachment;
+
+import io.jsonwebtoken.security.Request;
 
 @Controller
 @RequestMapping("/board")
@@ -19,7 +23,11 @@ public class BoardController {
     // 게시글 리스트
 	@RequestMapping("/boardList")
 	public String index() {
-		return "board/board";
+
+	String name = SecurityContextHolder.getContext().getAuthentication().getName();
+
+
+		return "board/board"+name;
 	}
 	
 	@RequestMapping("/main")
@@ -69,6 +77,7 @@ public class BoardController {
 	@RequestMapping(value = {"/write/{id}", "/write"})
 	public String detail(@PathVariable(value = "id", required = false) Integer id, Model model) {
 		System.out.println("상세페이지 들어가짐");
+
 		System.out.println("id:"+id);
 		if (id != null) {
 

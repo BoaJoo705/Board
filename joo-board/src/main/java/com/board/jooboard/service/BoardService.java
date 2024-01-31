@@ -17,10 +17,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.board.jooboard.dao.BoardAttachmentDao;
 import com.board.jooboard.dao.BoardDao;
+import com.board.jooboard.util.FileUtils;
 import com.board.jooboard.vo.Board;
 import com.board.jooboard.vo.BoardAttachment;
-
-import util.FileUtils;
 
 
 

@@ -24,13 +24,13 @@
                                 <div class="card shadow-lg border-0 rounded-lg mt-5">
                                     <div class="card-header"><h3 class="text-center font-weight-light my-4">로그인</h3></div>
                                     <div class="card-body">
-                                        <form>
+                                        <form id="userform" method="post">
                                             <div class="form-floating mb-3">
-                                                <input class="form-control" id="userId" type="text" />
+                                                <input class="form-control" id="userId" type="text" name="username"/>
                                                 <label for="inputEmail">아이디</label>
                                             </div>
                                             <div class="form-floating mb-3">
-                                                <input class="form-control" id="userPw" type="password" />
+                                                <input class="form-control" id="userPw" type="password" name="password"/>
                                                 <label for="inputPassword">비밀번호</label>
                                             </div>
                                             <div class="mt-4 mb-0">

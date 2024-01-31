@@ -10,7 +10,8 @@
         	USER_EMAIL,
         	MOBILE_NO,
         	BIRTH,
-        	REG_DATE
+        	REG_DATE,
+			ROLE
         )
         VALUES
         (
@@ -20,7 +21,8 @@
         	#{userEmail},
         	#{mobileNo},
         	#{birth},
-        	now()
+        	now(),
+			#{role}
 		)
     </insert>
     
@@ -39,5 +41,19 @@
    		WHERE USER_ID = #{userId}
 		AND USER_PW = #{userPw}
     </select>
+
+	<select id="findByUserId" parameterType="com.board.jooboard.vo.Users" resultType="com.board.jooboard.vo.Users"> 	
+		SELECT 
+			* 
+		FROM  USERS
+		WHERE USER_ID = #{userId}
+	</select>
+
+	<select id="findOne" parameterType="com.board.jooboard.vo.Users" resultType="java.util.Optional">
+		SELECT 
+			* 
+		FROM  USERS
+		WHERE USER_ID = #{userId}
+	</select>
 
 </mapper>

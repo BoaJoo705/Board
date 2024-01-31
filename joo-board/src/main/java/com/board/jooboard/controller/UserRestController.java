@@ -3,9 +3,11 @@ package com.board.jooboard.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.board.jooboard.service.UserService;
@@ -13,16 +15,21 @@ import com.board.jooboard.vo.Result;
 import com.board.jooboard.vo.Users;
 
 @RestController
+@ResponseBody
 @RequestMapping("/api")
 public class UserRestController {
 
     @Autowired
     private UserService userService;
 
+    public UserRestController(UserService userService){
+        this.userService = userService;
+    }
+
 
     // 회원가입
     @PostMapping("/signup")
-    public ResponseEntity<Result> signup(@RequestBody Users users){
+    public ResponseEntity<Result> signup(@RequestBody Users users ){
         System.out.println("signup 컨트롤러 진입");
         userService.signup(users);
 
@@ -65,6 +72,7 @@ public class UserRestController {
 		Result result = new Result();
         if(loginChk == 1){ 
             // 로그인 성공
+            
             result.setCode("ok");
             // result.setMessage("로그인 되었습니다.");
 

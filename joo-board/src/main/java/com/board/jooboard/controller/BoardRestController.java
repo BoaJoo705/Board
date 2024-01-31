@@ -4,6 +4,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,6 +23,7 @@ public class BoardRestController {
 	
 	@Autowired
 	private BoardService boardService;
+
 
 	// 게시글 등록
 	@RequestMapping(value = "/insert")
@@ -105,6 +107,12 @@ public class BoardRestController {
 		ModelAndView mv = new ModelAndView("/board/board");
 		
 		List<Board> list = boardService.selectBoardList();
+
+		// 사용자 아이디 
+		String name = SecurityContextHolder.getContext().getAuthentication().getName();
+
+		mv.addObject("name", name);
+
 		mv.addObject("list",list);
 		return mv;
 	}

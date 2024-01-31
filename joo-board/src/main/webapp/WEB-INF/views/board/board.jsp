@@ -18,7 +18,7 @@
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
-            <a class="navbar-brand ps-3" href="/api/list">Boa's board</a>
+            <a class="navbar-brand ps-3" href="/api/list">Boa's board ${name }</a>
             <!-- Sidebar Toggle-->
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
             <!-- Navbar Search-->
@@ -38,7 +38,7 @@
                         <!-- <li><a class="dropdown-item" href="#!">Activity Log</a></li>
                         <li><hr class="dropdown-divider" /></li> -->
                         <!-- 로그인 되어있으면 노출 O-->
-                        <li><a class="dropdown-item" href="#!">로그아웃</a></li>
+                        <li><a class="dropdown-item" id="logout">로그아웃</a></li>
                     </ul>
                 </li>
             </ul>
@@ -140,7 +140,7 @@
                                         <tr>
                                             <th>번호</th>
                                             <th>제목</th>
-                                            <th>조회수</th>
+                                            <th>작성자</th>
                                             <th>작성일</th>
                                         </tr>
                                     </thead>
@@ -152,7 +152,7 @@
 												<tr>	
 													<td>${boardList.boardId }</td>
 													<td><a href="/board/write/${boardList.boardId}">${boardList.boardTitle }</a></td>
-													<td>${boardList.boardCnt }</td>
+													<td>${boardList.userId }</td>
 													<td>${date }</td>
 												<tr>
 											</c:forEach>
@@ -190,7 +190,9 @@
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="/resources/js/scripts.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
         <script src="/resources/js/datatables-simple-demo.js"></script>
+        <script src="/resources/js/board.js"></script>
     </body>
 </html>
